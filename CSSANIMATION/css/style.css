@@ -1,0 +1,42 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    margin-bottom:50px;
+}
+.m1{
+    color:blue;
+    background:red;
+    text-align:center;
+    font-weight:800;
+    font-size:40px;
+}
+@keyframes buttonanimation{
+    from{
+        background-color: blue;
+        padding:10px;
+        border:2px solid black;
+        border-radius:10px;
+    }
+    to{
+        background-color: red;
+        padding:30px;
+        border:4px dotted black;
+        border-radius:20px;
+    }
+}
+.button{
+    background:blue;
+    color:white;
+    text-decoration: double;
+    font-size:30px;
+    font-weight: 600;
+    animation-name:buttonanimation;
+    animation-duration: 2s;
+    animation-iteration-count:infinite;
+}
+.button:hover{
+    background-color: rgb(133, 133, 202);
+    border:3px dashed black;
+    border-radius:10px;
+}
