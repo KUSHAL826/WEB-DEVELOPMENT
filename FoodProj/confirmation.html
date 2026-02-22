@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation - GNA PRODUCTIONS</title>
+<style>
+    body { font-family: Arial, sans-serif; background:#fafafa; color:#333; padding:20px; }
+    header { background:#4CAF50; color:white; padding:30px 20px; text-align:center; }
+    h2 { color:#388E3C; text-align:center; margin-bottom:20px; }
+    .confirmation { max-width:800px; margin:20px auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    .user-info p { margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; margin-top:15px; }
+    table, th, td { border:1px solid #ccc; }
+    th, td { padding:10px; text-align:center; }
+    th { background:#f2f2f2; }
+    .total { text-align:right; font-size:1.2rem; margin-top:15px; }
+    .home-btn { display:block; margin:20px auto 0; padding:10px 20px; background:#4CAF50; color:white; text-align:center; text-decoration:none; border-radius:5px; width:200px; }
+</style>
+</head>
+<body>
+<header>
+    <h1>🌿 GNA PRODUCTIONS - Order Confirmation</h1>
+</header>
+
+<div class="confirmation">
+    <h2>Thank You for Your Order!</h2>
+    <div class="user-info">
+        <p><strong>Name:</strong> <span id="confName"></span></p>
+        <p><strong>Phone:</strong> <span id="confPhone"></span></p>
+        <p><strong>Address:</strong> <span id="confAddress"></span></p>
+        <p><strong>Pincode:</strong> <span id="confPincode"></span></p>
+    </div>
+
+    <h3>Order Details</h3>
+    <table id="orderTable">
+        <tr>
+            <th>Spice</th>
+            <th>Weight (kg)</th>
+            <th>Price (₹)</th>
+        </tr>
+    </table>
+
+    <div class="total">
+        <strong>Total Price: ₹<span id="confTotal"></span></strong>
+    </div>
+
+    <p style="margin-top:20px;">
+        We will contact you soon to confirm your order details.<br>
+        Your freshly prepared spices will be delivered as soon as possible.<br>
+        Thank you for trusting GNA PRODUCTIONS for your authentic flavors.<br>
+        We ensure quality, hygiene, and care in every order.<br>
+        Enjoy your cooking with our handpicked spices!
+    </p>
+
+    <a href="index.html" class="home-btn">Back to Home</a>
+</div>
+
+<script>
+    const orderData = JSON.parse(localStorage.getItem('orderData'));
+
+    if(orderData) {
+        document.getElementById('confName').textContent = orderData.name;
+        document.getElementById('confPhone').textContent = orderData.phone;
+        document.getElementById('confAddress').textContent = orderData.address;
+        document.getElementById('confPincode').textContent = orderData.pincode;
+        document.getElementById('confTotal').textContent = orderData.total;
+
+        const table = document.getElementById('orderTable');
+        orderData.orderItems.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${item.name}</td><td>${item.weight}</td><td>₹${item.price.toFixed(2)}</td>`;
+            table.appendChild(tr);
+        });
+    }
+</script>
+</body>
+</html>

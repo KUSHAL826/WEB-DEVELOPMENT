@@ -1,0 +1,131 @@
+/* Reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+}
+
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header .logo {
+    font-size: 2rem;
+}
+
+/* About Section */
+.about-section {
+    width: 100%;
+    max-width: none; /* remove container limit */
+    padding: 50px 15%;
+    background-color: #ffffff;
+    margin: 30px 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.about-section h2 {
+    color: #4CAF50;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.about-section p {
+    margin-bottom: 18px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.about-section h3 {
+    margin-top: 35px;
+    color: #333;
+}
+
+/* Owner Card */
+.owner-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-left: 6px solid #4CAF50;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.owner-card p {
+    margin-bottom: 12px;
+}
+
+/* More Info Section */
+.more-info {
+    width: 100%;
+    max-width: none;
+    padding: 50px 15%;
+    background-color: #e8f5e9;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.more-info h2 {
+    color: #388E3C;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.more-info ul {
+    list-style: disc inside;
+}
+
+.more-info ul li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsive adjustments */
+@media(max-width: 1200px) {
+    .about-section, .more-info {
+        padding: 40px 10%;
+    }
+}
+
+@media(max-width: 768px) {
+    header .logo {
+        font-size: 1.8rem;
+    }
+
+    .about-section, .more-info {
+        padding: 30px 8%;
+    }
+
+    .about-section h2, .more-info h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media(max-width: 480px) {
+    .about-section, .more-info {
+        padding: 25px 5%;
+    }
+
+    .about-section h2, .more-info h2 {
+        font-size: 1.4rem;
+    }
+}
