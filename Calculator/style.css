@@ -1,0 +1,49 @@
+.c{
+    background-color: rgba(60, 58, 58, 0.63);
+    height: 100vh;                  /* full screen */
+    display: flex;                  
+    justify-content: center;        
+    align-items: center;            
+}
+
+.c1{
+    background-color: black;
+    width: 320px;                   
+    padding: 20px;
+    border-radius: 15px;            
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* Display area */
+.c1::before{
+    content: "";
+    display: block;
+    background-color: white;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.c2{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 8px;                       /* fixed */
+}
+
+.num{
+    background-color: rgb(168, 161, 161);
+    text-align: center;
+    padding: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Hover effect */
+.num:hover{
+    background-color: orange;
+    color: white;
+    transform: scale(1.05);
+}
