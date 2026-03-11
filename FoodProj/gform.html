@@ -1,190 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spice Booking Form - GNA PRODUCTIONS</title>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: Arial, sans-serif; background:#fafafa; color:#333; line-height:1.6; }
-        header { background: #4CAF50; color:white; padding:30px 20px; text-align:center; }
-        .booking-section { padding: 40px 15%; }
-        h2 { text-align:center; margin-bottom:25px; color:#388E3C; }
-        .user-info input { display:block; width:100%; padding:10px 12px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; }
-        .item-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
-        .item-row select, .item-row input { padding:8px; border-radius:5px; border:1px solid #ccc; flex:1; }
-        .item-price { width:100px; text-align:right; }
-        .remove-btn { background:#f44336; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; }
-        #addItemBtn, .confirm-btn { padding:10px 20px; border:none; border-radius:5px; cursor:pointer; margin-top:10px; }
-        #addItemBtn { background:#4CAF50; color:white; }
-        .confirm-btn { background:#388E3C; color:white; display:block; width:100%; margin-top:20px; }
-        .total { margin:20px 0; font-size:1.2rem; text-align:right; }
-        .message { color: red; font-weight: bold; margin-top: 10px; text-align: center; }
-        footer { background:#4CAF50; color:white; text-align:center; padding:20px 0; margin-top:40px; }
-        @media(max-width:768px) { .booking-section { padding:30px 10%; } }
-        @media(max-width:480px) { .booking-section { padding:20px 5%; } .item-price { width:80px; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Booking - GNA PRODUCTIONS</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#fafafa;
+color:#333;
+}
+
+header{
+background:#4CAF50;
+color:white;
+text-align:center;
+padding:30px;
+}
+
+.booking-section{
+padding:40px 15%;
+}
+
+h2{
+text-align:center;
+margin-bottom:25px;
+color:#388E3C;
+}
+
+.user-info input{
+display:block;
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.item-row{
+display:flex;
+gap:10px;
+margin-bottom:10px;
+flex-wrap:wrap;
+}
+
+.item-row select,
+.item-row input{
+padding:8px;
+border:1px solid #ccc;
+border-radius:5px;
+flex:1;
+}
+
+.item-price{
+width:100px;
+text-align:right;
+}
+
+.remove-btn{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+#addItemBtn{
+background:#4CAF50;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.confirm-btn{
+background:#388E3C;
+color:white;
+padding:12px;
+border:none;
+border-radius:5px;
+width:100%;
+margin-top:20px;
+cursor:pointer;
+}
+
+.total{
+margin:20px 0;
+font-size:20px;
+text-align:right;
+}
+
+footer{
+background:#4CAF50;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+.message{
+color:red;
+font-weight:bold;
+text-align:center;
+margin-top:10px;
+}
+</style>
+
 </head>
+
 <body>
-    <header>
-        <h1>🌿 GNA PRODUCTIONS - Spice Booking</h1>
-    </header>
 
-    <main>
-        <section class="booking-section">
-            <h2>Place Your Order</h2>
-            <!-- Netlify-enabled form -->
-            <form id="bookingForm" name="Spice Booking" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="Spice Booking">
+<header>
+<h1>🌿 GNA PRODUCTIONS - Spice Booking</h1>
+</header>
 
-                <!-- User Info -->
-                <div class="user-info">
-                    <input type="text" id="name" name="name" placeholder="Full Name" required>
-                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                    <input type="text" id="address" name="address" placeholder="Address" required>
-                    <input type="text" id="pincode" name="pincode" placeholder="Pincode" required>
-                </div>
+<section class="booking-section">
 
-                <!-- Display pincode message -->
-                <div id="pincodeMessage" class="message"></div>
+<h2>Place Your Order</h2>
 
-                <!-- Items -->
-                <h3>Items</h3>
-                <div id="itemsContainer">
-                    <div class="item-row">
-                        <select class="item-name" name="item[]" required>
-                            <option value="" disabled selected>Select Spice</option>
-                            <option value="Chilli Powder" data-price="500">Chilli Powder ₹500/kg</option>
-                            <option value="Turmeric Powder" data-price="500">Turmeric Powder ₹500/kg</option>
-                            <option value="Coriander Powder" data-price="500">Coriander Powder ₹500/kg</option>
-                            <option value="Cumin Powder" data-price="500">Cumin (Jeera) Powder ₹500/kg</option>
-                            <option value="Black Pepper Powder" data-price="500">Black Pepper Powder ₹500/kg</option>
-                            <option value="Garam Masala" data-price="500">Garam Masala ₹500/kg</option>
-                            <option value="Sambar Powder" data-price="500">Sambar Powder ₹500/kg</option>
-                            <option value="Rasam Powder" data-price="500">Rasam Powder ₹500/kg</option>
-                            <option value="Curry Leaves Powder" data-price="500">Curry Leaves Powder ₹500/kg</option>
-                            <option value="Ginger Powder" data-price="500">Ginger Powder ₹500/kg</option>
-                        </select>
-                        <input type="number" class="item-weight" name="weight[]" placeholder="Weight (kg)" min="0.1" step="0.1" required>
-                        <span class="item-price">₹0.00</span>
-                        <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
-                    </div>
-                </div>
+<form id="orderForm" name="SpiceBooking" method="POST" data-netlify="true" action="confirmation.html">
 
-                <button type="button" id="addItemBtn">+ Add Another Item</button>
+<input type="hidden" name="form-name" value="SpiceBooking">
 
-                <div class="total">
-                    <strong>Total Price: ₹<span id="totalPrice">0.00</span></strong>
-                </div>
+<div class="user-info">
 
-                <button type="submit" class="confirm-btn">Confirm Booking</button>
-            </form>
-        </section>
-    </main>
+<input type="text" name="name" id="name" placeholder="Full Name" required>
 
-    <footer>
-        &copy; 2026 GNA PRODUCTIONS
-    </footer>
+<input type="tel" name="phone" id="phone" placeholder="Phone Number" required>
 
-    <script>
-        const itemsContainer = document.getElementById('itemsContainer');
-        const addItemBtn = document.getElementById('addItemBtn');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const pincodeInput = document.getElementById('pincode');
-        const pincodeMessage = document.getElementById('pincodeMessage');
+<input type="text" name="address" id="address" placeholder="Address" required>
 
-        function calculateTotal() {
-            let total = 0;
-            const rows = document.querySelectorAll('.item-row');
-            rows.forEach(row => {
-                const select = row.querySelector('.item-name');
-                const weight = parseFloat(row.querySelector('.item-weight').value) || 0;
-                const pricePerKg = parseFloat(select.selectedOptions[0]?.dataset.price || 500);
-                const price = weight * pricePerKg;
-                row.querySelector('.item-price').textContent = `₹${price.toFixed(2)}`;
-                total += price;
-            });
-            totalPriceEl.textContent = total.toFixed(2);
-        }
+<input type="text" name="pincode" id="pincode" placeholder="Pincode" required>
 
-        addItemBtn.addEventListener('click', () => {
-            const newRow = document.createElement('div');
-            newRow.className = 'item-row';
-            newRow.innerHTML = `
-                <select class="item-name" name="item[]" required>
-                    <option value="" disabled selected>Select Spice</option>
-                    <option value="Chilli Powder" data-price="500">Chilli Powder ₹500/kg</option>
-                    <option value="Turmeric Powder" data-price="500">Turmeric Powder ₹500/kg</option>
-                    <option value="Coriander Powder" data-price="500">Coriander Powder ₹500/kg</option>
-                    <option value="Cumin Powder" data-price="500">Cumin (Jeera) Powder ₹500/kg</option>
-                    <option value="Black Pepper Powder" data-price="500">Black Pepper Powder ₹500/kg</option>
-                    <option value="Garam Masala" data-price="500">Garam Masala ₹500/kg</option>
-                    <option value="Sambar Powder" data-price="500">Sambar Powder ₹500/kg</option>
-                    <option value="Rasam Powder" data-price="500">Rasam Powder ₹500/kg</option>
-                    <option value="Curry Leaves Powder" data-price="500">Curry Leaves Powder ₹500/kg</option>
-                    <option value="Ginger Powder" data-price="500">Ginger Powder ₹500/kg</option>
-                </select>
-                <input type="number" class="item-weight" name="weight[]" placeholder="Weight (kg)" min="0.1" step="0.1" required>
-                <span class="item-price">₹0.00</span>
-                <button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
-            `;
-            itemsContainer.appendChild(newRow);
-        });
+</div>
 
-        function removeItem(button) {
-            button.parentElement.remove();
-            calculateTotal();
-        }
+<div id="pincodeMessage" class="message"></div>
 
-        itemsContainer.addEventListener('input', calculateTotal);
-        itemsContainer.addEventListener('change', calculateTotal);
+<h3>Items</h3>
 
-        // Check pincode
-        pincodeInput.addEventListener('input', () => {
-            if(pincodeInput.value !== "572125") {
-                pincodeMessage.textContent = "⚠ Sorry! We do not deliver to this pincode.";
-            } else {
-                pincodeMessage.textContent = "";
-            }
-        });
+<div id="itemsContainer">
 
-        document.getElementById('bookingForm').addEventListener('submit', (e) => {
-            // Prevent submission if pincode not 572125
-            if(pincodeInput.value !== "572125") {
-                e.preventDefault();
-                pincodeMessage.textContent = "⚠ Sorry! We do not deliver to this pincode.";
-                return;
-            }
+<div class="item-row">
 
-            // Gather user info
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const pincode = document.getElementById('pincode').value;
+<select class="item-name" name="item[]">
+<option disabled selected>Select Spice</option>
+<option data-price="500">Chilli Powder ₹500/kg</option>
+<option data-price="500">Turmeric Powder ₹500/kg</option>
+<option data-price="500">Coriander Powder ₹500/kg</option>
+<option data-price="500">Cumin Powder ₹500/kg</option>
+<option data-price="500">Black Pepper Powder ₹500/kg</option>
+<option data-price="500">Garam Masala ₹500/kg</option>
+</select>
 
-            // Gather items
-            const rows = document.querySelectorAll('.item-row');
-            const orderItems = [];
-            rows.forEach(row => {
-                const select = row.querySelector('.item-name');
-                const weight = parseFloat(row.querySelector('.item-weight').value) || 0;
-                const pricePerKg = parseFloat(select.selectedOptions[0]?.dataset.price || 500);
-                const price = weight * pricePerKg;
-                orderItems.push({
-                    name: select.value,
-                    weight: weight,
-                    price: price
-                });
-            });
+<input type="number" name="weight[]" class="item-weight" placeholder="Weight (kg)" step="0.1">
 
-            // Store in localStorage for confirmation page
-            localStorage.setItem('orderData', JSON.stringify({
-                name, phone, address, pincode, orderItems, total: totalPriceEl.textContent
-            }));
+<span class="item-price">₹0</span>
 
-            // Redirect to confirmation page
-            setTimeout(() => { window.location.href = 'confirmation.html'; }, 100);
-        });
-    </script>
+<button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
+
+</div>
+
+</div>
+
+<button type="button" id="addItemBtn">+ Add Item</button>
+
+<div class="total">
+Total Price: ₹ <span id="totalPrice">0</span>
+</div>
+
+<input type="hidden" name="total" id="totalInput">
+
+<button type="submit" class="confirm-btn">Confirm Booking</button>
+
+</form>
+
+</section>
+
+<footer>
+© 2026 GNA PRODUCTIONS
+</footer>
+
+<script>
+
+const itemsContainer = document.getElementById("itemsContainer");
+const totalPrice = document.getElementById("totalPrice");
+const totalInput = document.getElementById("totalInput");
+const addItemBtn = document.getElementById("addItemBtn");
+const pincode = document.getElementById("pincode");
+const message = document.getElementById("pincodeMessage");
+const form = document.getElementById("orderForm");
+
+function calculateTotal(){
+
+let total = 0;
+
+document.querySelectorAll(".item-row").forEach(row=>{
+
+const select = row.querySelector(".item-name");
+const weightInput = row.querySelector(".item-weight");
+
+if(!select || !weightInput) return;
+
+const price = select.options[select.selectedIndex]?.dataset.price || 0;
+const weight = parseFloat(weightInput.value) || 0;
+
+const itemTotal = price * weight;
+
+row.querySelector(".item-price").innerText = "₹" + itemTotal;
+
+total += itemTotal;
+
+});
+
+totalPrice.innerText = total;
+totalInput.value = total;
+
+}
+
+itemsContainer.addEventListener("input", calculateTotal);
+itemsContainer.addEventListener("change", calculateTotal);
+
+
+addItemBtn.onclick = function(){
+
+const row = document.createElement("div");
+
+row.className = "item-row";
+
+row.innerHTML = `
+<select class="item-name" name="item[]">
+<option disabled selected>Select Spice</option>
+<option data-price="500">Chilli Powder ₹500/kg</option>
+<option data-price="500">Turmeric Powder ₹500/kg</option>
+<option data-price="500">Coriander Powder ₹500/kg</option>
+<option data-price="500">Cumin Powder ₹500/kg</option>
+<option data-price="500">Black Pepper Powder ₹500/kg</option>
+<option data-price="500">Garam Masala ₹500/kg</option>
+</select>
+
+<input type="number" name="weight[]" class="item-weight" placeholder="Weight (kg)" step="0.1">
+
+<span class="item-price">₹0</span>
+
+<button type="button" class="remove-btn" onclick="removeItem(this)">Remove</button>
+`;
+
+itemsContainer.appendChild(row);
+
+};
+
+
+function removeItem(btn){
+
+btn.parentElement.remove();
+calculateTotal();
+
+}
+
+
+function checkPincode(){
+
+if(pincode.value !== "572125"){
+
+message.innerText = "⚠ Delivery only available for pincode 572125";
+
+}else{
+
+message.innerText = "";
+
+}
+
+}
+
+pincode.addEventListener("input", checkPincode);
+pincode.addEventListener("blur", checkPincode);
+
+
+form.addEventListener("submit", function(e){
+
+if(pincode.value !== "572125"){
+
+e.preventDefault();
+
+message.innerText = "⚠ Order cannot be placed outside pincode 572125";
+
+return;
+
+}
+
+let orderItems = [];
+
+document.querySelectorAll(".item-row").forEach(row=>{
+
+const spice = row.querySelector(".item-name").value;
+const weight = parseFloat(row.querySelector(".item-weight").value) || 0;
+const price = row.querySelector(".item-name").selectedOptions[0]?.dataset.price || 0;
+
+if(spice && weight){
+
+orderItems.push({
+name: spice,
+weight: weight,
+price: price * weight
+});
+
+}
+
+});
+
+const orderData = {
+name: document.getElementById("name").value,
+phone: document.getElementById("phone").value,
+address: document.getElementById("address").value,
+pincode: pincode.value,
+total: totalInput.value,
+orderItems: orderItems
+};
+
+localStorage.setItem("orderData", JSON.stringify(orderData));
+
+});
+
+
+</script>
+
 </body>
 </html>
