@@ -76,7 +76,108 @@
 // var x="5"
 // console.log(Number(x))
 
-console.log('1'==1) //true
-console.log(' '==0) //true
-console.log(null==undefined) //true
-console.log("1,2"==[1,2])  //true
+// // Comparision Operators
+// console.log('1'==1) //true
+// console.log(' '==0) //true
+// console.log(null==undefined) //true
+// console.log("1,2"==[1,2])  //true
+
+// //USE ===  fro strictly checking equals  where tyoe casting is not occuring
+// console.log(1=="1") //true
+// console.log(1==="1") //false
+
+//Logical Operators
+/*-->&&-and 
+-->||-or
+ --> !-not*/
+// console.log(true || false) //o/p->true
+// console.log(true && false) //o/p->false
+// console.log(!false) //o/p->true
+
+// //*********
+// //Here string is prefered over boolean values  in case OR||  reverse i && 
+// //if empty string  boolean values is prefered 
+// console.log("hello" || true) //o/p->hello
+// console.log("" || true) //o/p-> true
+// console.log("hello" || false) //o/p->hello
+// console.log("hello" && true) //o/p->true
+// console.log(" " && true) //o/p->true
+// console.log("hello" && false) //o/p->false
+
+// //Conditional
+// var x=10
+// if(x==10)
+// {
+//     console.log("10 HELLO")
+// }
+// else if(x==5)
+// {
+//     console.log("5 HELLO")
+// }
+// else
+// {
+//     console.log("HI")
+// }
+
+// //SWITCH
+// let c=1
+// switch(c)
+// {
+//     case 1:console.log("1-hello")
+//            break;
+//     case 2:console.log("2- hello")
+//            break; 
+//     case 3:console.log("3-hello")
+//            break;   
+//     case 10:console.log("10-hello")
+//            break;  
+//     default:console.log("DEFAULT")
+//             break;
+// }
+
+// //ARRAY  printing values and index of array
+// const arr=[1,2,3]
+// for(let [i,values] of arr.entries())
+// {
+//     console.log(`INDEX-${i}  VALUES-${values}`)
+// }
+
+// //ARRAY  printing values and index of array
+// const arr=[1,2,3]
+// for(let i =0;i<arr.length;i++)
+// {
+//     console.log(`INDEX-${i}  VALUES-${arr[i]}`)
+// }
+
+//OBJECT
+// function hello()
+// {
+//     return "HELLO"
+// }
+// const obj={
+//     name:"Alice",
+//     age:23,
+//     sayHello: hello()
+// }
+// for (let [i,values] of Object.entries(obj)){
+//     console.log(`KEY-${i}  VALUES-${values}`)
+// }
+
+function hello()
+{
+    return "HELLO"
+}
+const obj={
+    name:"Alice",
+    age:23,
+    sayHello: hello()
+}
+delete obj.age
+for(let key in obj)
+{
+    console.log(key)
+}
+for (let value in Object.values(obj))
+{
+    console.log(value)
+}
